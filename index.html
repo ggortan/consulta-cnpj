@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117077963-5"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117077963-5');
+    </script>
+
+
+
+    <meta charset="utf-8">
+    <title>Consultar CNPJ v2</title>
+
+
+  </head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Consulta CNPJ v2</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Histórico</a>
+              </li>
+            </ul>
+          </div>
+        
+                <span class="navbar-text me-3">
+                Digite o CNPJ que deseja consultar:
+                </span>        
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" id="cnpj" type="text" class="form-control" placeholder="00.000.000/0000-00" aria-label="Cosultar">
+                    <button class="btn btn-outline-success" onclick="callcnpj()">Consultar</button>
+                </form>
+            
+        </div>
+      </nav>
+
+      <div class="container">
+            <section id="enformacoes" class="informacoes" style="margin: 20px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6 col-sm-12 col-xs-12 ">
+                            <!-- contact form -->
+                            <div class="contact-form">
+                                <form id="post" class="clearfix" accept-charset="utf-8">
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="situacao">Situaçao</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="situacao" required placeholder="Situaçao" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="cnpjt">CNPJ</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="cnpjt" required placeholder="CNPJ" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="nome">Razão Social</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="nome" required placeholder="R. Social" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="fantasia">Nome Fantasia</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="fantasia" required placeholder="Nome Fantasia" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="atividade">Atividade Principal</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="atividade" required placeholder="Atividade Principal" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="telefone">Telefone</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="telefone" required placeholder="Telefone" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="email">E-mail</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="email" required placeholder="E-mail" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="cep">CEP</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="cep" required placeholder="CEP" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="logradouro">Logradouro</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="logradouro" required placeholder="Logradouro" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="numero">Número</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="numero" required placeholder="Número" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="complemento">Complemento</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="complemento" required placeholder="Complemento" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="bairro">Bairro</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <input type="text" id="bairro" required placeholder="Bairro" class="form-control input-lg" required="" disabled>	
+                                        </div>
+                                    </div>
+									<div class="row">
+                                        <div class="col-sm-4 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+                                            <label for="uf">Estado</label>																		
+                                        </div>
+                                        <div class="col-sm-8 form-group wow fadeInDown" data-wow-delay="700ms" data-wow-duration="1000ms">
+											  <select id="uf" class="form-control" disabled>
+												<option value="AC">Acre</option>
+												<option value="AL">Alagoas</option>
+												<option value="AP">Amapá</option>
+												<option value="AM">Amazonas</option>
+												<option value="BA">Bahia</option>
+												<option value="CE">Ceará</option>
+												<option value="DF">Distrito Federal</option>
+												<option value="ES">Espírito Santo</option>
+												<option value="GO">Goiás</option>
+												<option value="MA">Maranhão</option>
+												<option value="MT">Mato Grosso</option>
+												<option value="MS">Mato Grosso do Sul</option>
+												<option value="MG">Minas Gerais</option>
+												<option value="PA">Pará</option>
+												<option value="PB">Paraíba</option>
+												<option value="PR">Paraná</option>
+												<option value="PE">Pernambuco</option>
+												<option value="PI">Piauí</option>
+												<option value="RJ">Rio de Janeiro</option>
+												<option value="RN">Rio Grande do Norte</option>
+												<option value="RS">Rio Grande do Sul</option>
+												<option value="RO">Rondônia</option>
+												<option value="RR">Roraima</option>
+												<option value="SC">Santa Catarina</option>
+												<option value="SP">São Paulo</option>
+												<option value="SE">Sergipe</option>
+												<option value="TO">Tocantins</option>
+											  </select>											
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+	
+	<script type="text/javascript">
+        
+		function callcnpj(){
+			//Início do Comando AJAX
+			$.ajax({
+				//O campo URL diz o caminho de onde virá os dados
+				//É importante concatenar o valor digitado no CNPJ
+				url: './dados/cnpj.php?cnpj='+$("#cnpj").val(),
+	//Atualização: caso use java, use cnpj.jsp, usando o outro exemplo.
+				//Aqui você deve preencher o tipo de dados que será lido,
+				//no caso, estamos lendo JSON.
+				dataType: 'json',
+				//SUCESS é referente a função que será executada caso
+				//ele consiga ler a fonte de dados com sucesso.
+				//O parâmetro dentro da função se refere ao nome da variável
+				//que você vai dar para ler esse objeto.
+				success: function(resposta){
+					//Confere se houve erro e o imprime
+					if(resposta.status == "ERROR"){
+						alert(resposta.message + "\nPor favor, digite os dados manualmente.");
+						$("#post #nome").focus().select();
+						return false;
+					}
+					//Agora basta definir os valores que você deseja preencher
+					//automaticamente nos campos acima.
+					$("#post #situacao").val(resposta.situacao);
+					$("#post #cnpjt").val(resposta.cnpj);
+					$("#post #nome").val(resposta.nome);
+					$("#post #fantasia").val(resposta.fantasia);
+					$("#post #atividade").val(resposta.atividade_principal[0].text + " (" + resposta.atividade_principal[0].code + ")");
+					$("#post #telefone").val(resposta.telefone);
+					$("#post #email").val(resposta.email);
+					$("#post #logradouro").val(resposta.logradouro);
+					$("#post #complemento").val(resposta.complemento);
+					$("#post #bairro").val(resposta.bairro);
+					$("#post #cidade").val(resposta.municipio);
+					$("#post #uf").val(resposta.uf);
+					$("#post #cep").val(resposta.cep);
+					$("#post #numero").val(resposta.numero);
+				}
+			});
+		};
+	</script>
+	
+	
+</body>
+</html>
