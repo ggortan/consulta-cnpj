@@ -1,13 +1,10 @@
-# Projeto de requisição API do ReceitaWS.com.br
-Disponivel em:
-https://dev.gortan.com.br/tools/cnpj
+# Projeto de requisição API do ReceitaWS.com.br 
 
-Consulta online de CNPJ atraes da API gratuita do Receita WS disponivel em https://developers.receitaws.com.br/#/operations/queryCNPJFree
+Disponível em: https://dev.gortan.com.br/tools/cnpj
 
-Retorno dos dados em uma interface contruida em Bootstrap 5
+Consulta online de CNPJ atraves da API gratuita do Receita WS disponível em https://developers.receitaws.com.br/#/operations/queryCNPJFree 
 
-Requisição:
-get https://receitaws.com.br/v1/cnpj/{cnpj}
-
+Retorno dos dados em uma interface construída em Bootstrap 5 
+Requisição: get https://receitaws.com.br/v1/cnpj/{cnpj} 
 
 Autor: Gabriel Gortan
