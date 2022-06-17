@@ -1,4 +1,6 @@
 # Projeto de requisição API do ReceitaWS.com.br
+Disponivel em:
+https://dev.gortan.com.br/tools/cnpj
 
 Consulta online de CNPJ atraes da API gratuiota do Receita WS disponivel em https://developers.receitaws.com.br/#/operations/queryCNPJFree
 
