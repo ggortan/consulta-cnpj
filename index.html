@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -15,8 +16,9 @@
 
   </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
         <div class="container-fluid">
+          <a class="btn btn-sm btn-primary me-3" role="button" href="https://dev.gortan.com.br/tools/"><i class="bi bi-arrow-left"></i> Dev Tools</a>
           <a class="navbar-brand" href="#">Consulta CNPJ v2</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,14 +45,20 @@
         </div>
       </nav>
 
-      <div class="container mt-3">
+      <div class="container mb-3 mt-3" >
         <form class="row g-4">
             <div class="row mt-4">
                 <div class="col-sm-6">
-                Consulta: <span id="status" class=""></span> <span id="ultima-atualizacao" class="placeholder col-7"></span>
-                </div>
+                    <ul class="list-group">
+                    <li class="list-group-item">
+                Situação: <span id="situacao" class="placeholder col-1"></span> Data da Situação Cadastral: <span id="data-situacao" class="placeholder col-1"></span>
+            </li></ul>
+            </div>
                 <div class="col-sm-6">
-                Situação: <span id="situacao" class="placeholder col-1"><span>
+                    <ul class="list-group">
+                        <li class="list-group-item">Consulta: <span id="status" class=""></span> <span id="ultima-atualizacao" class="placeholder col-7"></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -132,17 +140,52 @@
                     </div>
                 </div>
             </form>
+        
+
+        <div class="row g-2">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header" >
+                    Quadro de Sócios e Administradores
+                </div>
+                <div class="card-body" id="">
+                    <ul class="list-group" id="membros">
+                        <li class="list-group-item">Não está disponivel nesta versão</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-header">
-                    Retorno
-                  </div>
-                
+                    Retorno JSON
+                </div>
                 <div class="card-body" id="retorno-cru">
                 </div>
-              </div>
             </div>
+        </div>
+        </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">Projeto de API - Gabriel G.</p>
+
+        <p class=" mb-0 text-muted text-center">Versão: 2.1.1</p>
+
+        <!--<ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        </ul>-->
+    </footer>
+
 	
+</div>
+
+            
 	<script type="text/javascript">
+
+
         var input = document.getElementById("cnpj");
 
             // Execute a function when the user presses a key on the keyboard
@@ -167,8 +210,12 @@
                     }else{
 
                         document.getElementById('situacao').textContent = data.situacao;
+                        document.getElementById('data-situacao').textContent = data.data_situacao + " (" + ( new Date().getFullYear() - data.data_situacao.split('/')[2])  + " anos )";
+                        document.getElementById('data-situacao').className = "badge bg-light text-dark";
+
                             if(data.situacao == "ATIVA"){
                                 document.getElementById('situacao').className = "badge bg-success"
+                                
                             }else{
                                 document.getElementById('situacao').className = "badge bg-warning"
                             }
@@ -179,10 +226,13 @@
                             }else{
                                 document.getElementById('status').className = "badge bg-warning"
                             }
-
+                        
+                        
                         document.getElementById('cnpj-campo').value = data.cnpj;
                         document.getElementById('ultima-atualizacao').textContent = "Ultima Atualização: " + data.ultima_atualizacao; 
                         document.getElementById('ultima-atualizacao').classList.remove("placeholder","col-7");
+                        document.getElementById('ultima-atualizacao').className = "badge bg-light text-dark";
+
                         document.getElementById('razao-social').value = data.nome;
                         document.getElementById('nome-fantasia').value = data.fantasia;
                         document.getElementById('telefone').value = data.telefone;
@@ -195,7 +245,10 @@
                         
                         document.getElementById('retorno-cru').textContent = JSON.stringify(data, null, 1);
 
+                        
+                        localStorage.setItem('cnpj' , data.cnpj);
                         console.log(data);
+
                   }
                 }
             })
