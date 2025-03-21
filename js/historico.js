@@ -9,10 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
         historico.forEach(entry => {
             const tr = document.createElement('tr');
             const tdCnpj = document.createElement('td');
+            const tdRSocial = document.createElement('td');
             const tdData = document.createElement('td');
             tdCnpj.textContent = entry.cnpj;
+            tdCnpj.textContent = entry.rsocial;
             tdData.textContent = entry.data;
             tr.appendChild(tdCnpj);
+            tr.appendChild(tdRSocial);
             tr.appendChild(tdData);
             historicoTabela.appendChild(tr);
         });
