@@ -86,13 +86,10 @@ function callcnpj(cnpj) {
 
                     retornoCruEl.textContent = JSON.stringify(data, null, 2);
 
-                    localStorage.setItem('cnpj', data.cnpj);
-                    localStorage.setItem('rsocial', data.nome);
-
                     // Atualiza o histórico na sessão
-                    let historico = JSON.parse(sessionStorage.getItem('historico_cnpjs')) || [];
+                    let historico = JSON.parse(localStorage.getItem('historico_cnpjs')) || [];
                     historico.unshift({ cnpj: data.cnpj, rsocial: data.nome, data: new Date().toLocaleDateString() });
-                    sessionStorage.setItem('historico_cnpjs', JSON.stringify(historico));
+                    localStorage.setItem('historico_cnpjs', JSON.stringify(historico));
                 } else {
                     console.error('Um ou mais elementos DOM não foram encontrados.');
                 }
