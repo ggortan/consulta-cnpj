@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para carregar o histórico
     function carregarHistorico() {
-        const historico = JSON.parse(sessionStorage.getItem('historico_cnpjs')) || [];
+        const historico = JSON.parse(localStorage.getItem('historico_cnpjs')) || [];
         historicoTabela.innerHTML = ''; // Limpa a tabela antes de renderizar
         historico.forEach(entry => {
             const tr = document.createElement('tr');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para limpar o histórico
     function limparHistorico() {
-        sessionStorage.removeItem('historico_cnpjs');
+        localStorage.removeItem('historico_cnpjs');
         carregarHistorico(); // Atualiza a tabela após limpar
     }
 
