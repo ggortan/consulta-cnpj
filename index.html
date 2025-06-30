@@ -185,12 +185,120 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        Retorno JSON
+                        <ul class="nav nav-tabs card-header-tabs" id="infoTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="info-adicional-tab" data-bs-toggle="tab" data-bs-target="#info-adicional" type="button" role="tab" aria-controls="info-adicional" aria-selected="true">
+                                    <i class="bi bi-info-circle"></i> Informações Adicionais
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="retorno-json-tab" data-bs-toggle="tab" data-bs-target="#retorno-json" type="button" role="tab" aria-controls="retorno-json" aria-selected="false">
+                                    <i class="bi bi-code-square"></i> Retorno JSON
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
-                        <pre id="retorno-cru" class="bg-light p-3 rounded" style="font-size: 0.85em; max-height: 400px; overflow-y: auto;">
-                            <!-- Retorno JSON será exibido aqui -->
-                        </pre>
+                        <div class="tab-content" id="infoTabsContent">
+                            <div class="tab-pane fade show active" id="info-adicional" role="tabpanel" aria-labelledby="info-adicional-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary"><i class="bi bi-building"></i> Dados Empresariais</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Capital Social:</strong></td>
+                                                    <td id="info-capital-social">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tipo:</strong></td>
+                                                    <td id="info-matriz-filial">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Data de Abertura:</strong></td>
+                                                    <td id="info-data-abertura">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Código IBGE:</strong></td>
+                                                    <td id="info-codigo-ibge">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <h6 class="text-primary mt-4"><i class="bi bi-geo-alt"></i> Informações de Localização</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Código Município:</strong></td>
+                                                    <td id="info-codigo-municipio">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tipo de Logradouro:</strong></td>
+                                                    <td id="info-tipo-logradouro">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Telefone 2:</strong></td>
+                                                    <td id="info-telefone2">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Fax:</strong></td>
+                                                    <td id="info-fax">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary"><i class="bi bi-shield-check"></i> Situação Fiscal</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Motivo Situação:</strong></td>
+                                                    <td id="info-motivo-situacao">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Situação Especial:</strong></td>
+                                                    <td id="info-situacao-especial">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Data Sit. Especial:</strong></td>
+                                                    <td id="info-data-situacao-especial">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Responsável:</strong></td>
+                                                    <td id="info-responsavel">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <h6 class="text-primary mt-4"><i class="bi bi-calculator"></i> Regime Tributário</h6>
+                                        <div id="info-regime-tributario" class="border rounded p-3 bg-light" style="max-height: 200px; overflow-y: auto;">
+                                            <small class="text-muted">Nenhuma informação disponível</small>
+                                        </div>
+
+                                        <h6 class="text-primary mt-3"><i class="bi bi-toggle-on"></i> Opções Fiscais</h6>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Simples Nacional:</strong></td>
+                                                    <td id="info-simples">-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>MEI:</strong></td>
+                                                    <td id="info-mei">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="retorno-json" role="tabpanel" aria-labelledby="retorno-json-tab">
+                                <pre id="retorno-cru" class="bg-light p-3 rounded" style="font-size: 0.85em; max-height: 400px; overflow-y: auto;">
+                                    <!-- Retorno JSON será exibido aqui -->
+                                </pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -276,6 +384,9 @@
             document.getElementById('atividade-principal').innerHTML = '';
             document.getElementById('atividades-secundarias').innerHTML = '';
             document.getElementById('retorno-cru').textContent = '';
+            
+            // Limpa informações adicionais
+            limparInformacoesAdicionais();
         }
 
         function preencherCampos(data) {
@@ -387,6 +498,9 @@
 
             // Retorno JSON
             document.getElementById('retorno-cru').textContent = JSON.stringify(data, null, 2);
+            
+            // Preenche informações adicionais
+            preencherInformacoesAdicionais(data);
         }
 
         function salvarHistorico(data) {
@@ -431,6 +545,99 @@
             return telefone;
         }
 
+        function limparInformacoesAdicionais() {
+            const camposAdicionais = [
+                'info-capital-social', 'info-matriz-filial', 'info-data-abertura', 'info-codigo-ibge',
+                'info-codigo-municipio', 'info-tipo-logradouro', 'info-telefone2', 'info-fax',
+                'info-motivo-situacao', 'info-situacao-especial', 'info-data-situacao-especial',
+                'info-responsavel', 'info-simples', 'info-mei'
+            ];
+            
+            camposAdicionais.forEach(campo => {
+                const elemento = document.getElementById(campo);
+                if (elemento) {
+                    elemento.textContent = '-';
+                }
+            });
+            
+            document.getElementById('info-regime-tributario').innerHTML = '<small class="text-muted">Nenhuma informação disponível</small>';
+        }
+
+        function preencherInformacoesAdicionais(data) {
+            // Dados Empresariais
+            document.getElementById('info-capital-social').textContent = 
+                data.capital_social ? `R$ ${Number(data.capital_social).toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : 'Não informado';
+            
+            document.getElementById('info-matriz-filial').textContent = 
+                data.descricao_identificador_matriz_filial || 'Não informado';
+            
+            if (data.data_inicio_atividade) {
+                const dataFormatada = new Date(data.data_inicio_atividade).toLocaleDateString('pt-BR');
+                document.getElementById('info-data-abertura').textContent = dataFormatada;
+            }
+            
+            document.getElementById('info-codigo-ibge').textContent = 
+                data.codigo_municipio_ibge || 'Não informado';
+
+            // Informações de Localização
+            document.getElementById('info-codigo-municipio').textContent = 
+                data.codigo_municipio || 'Não informado';
+            
+            document.getElementById('info-tipo-logradouro').textContent = 
+                data.descricao_tipo_de_logradouro || 'Não informado';
+            
+            const telefone2 = data.ddd_telefone_2 || '';
+            document.getElementById('info-telefone2').textContent = 
+                telefone2 ? formatarTelefone(telefone2) : 'Não informado';
+            
+            const fax = data.ddd_fax || '';
+            document.getElementById('info-fax').textContent = 
+                fax ? formatarTelefone(fax) : 'Não informado';
+
+            // Situação Fiscal
+            document.getElementById('info-motivo-situacao').textContent = 
+                data.descricao_motivo_situacao_cadastral || 'Não informado';
+            
+            document.getElementById('info-situacao-especial').textContent = 
+                data.situacao_especial || 'Nenhuma';
+            
+            if (data.data_situacao_especial) {
+                const dataFormatada = new Date(data.data_situacao_especial).toLocaleDateString('pt-BR');
+                document.getElementById('info-data-situacao-especial').textContent = dataFormatada;
+            } else {
+                document.getElementById('info-data-situacao-especial').textContent = 'Não informado';
+            }
+            
+            document.getElementById('info-responsavel').textContent = 
+                data.ente_federativo_responsavel || 'Não informado';
+
+            // Regime Tributário
+            const regimeTributarioEl = document.getElementById('info-regime-tributario');
+            if (data.regime_tributario && data.regime_tributario.length > 0) {
+                regimeTributarioEl.innerHTML = '';
+                data.regime_tributario.forEach(regime => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-2 p-2 border rounded bg-white';
+                    div.innerHTML = `
+                        <strong>Ano ${regime.ano}:</strong> ${regime.forma_de_tributacao}<br>
+                        <small class="text-muted">Escriturações: ${regime.quantidade_de_escrituracoes}</small>
+                    `;
+                    regimeTributarioEl.appendChild(div);
+                });
+            }
+
+            // Opções Fiscais
+            const simplesStatus = data.opcao_pelo_simples === null ? 'Não optante' : 
+                                 data.opcao_pelo_simples ? 'Optante' : 'Não optante';
+            document.getElementById('info-simples').innerHTML = 
+                `<span class="badge ${data.opcao_pelo_simples ? 'bg-success' : 'bg-secondary'}">${simplesStatus}</span>`;
+            
+            const meiStatus = data.opcao_pelo_mei === null ? 'Não optante' : 
+                             data.opcao_pelo_mei ? 'Optante' : 'Não optante';
+            document.getElementById('info-mei').innerHTML = 
+                `<span class="badge ${data.opcao_pelo_mei ? 'bg-success' : 'bg-secondary'}">${meiStatus}</span>`;
+        }
+
         // Adiciona o evento keypress ao campo de CNPJ
         document.getElementById("cnpj").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
@@ -442,6 +649,18 @@
         // Aplicar máscara no campo CNPJ
         $(document).ready(function() {
             $('#cnpj').mask('00.000.000/0000-00');
+            
+            // Verifica se há CNPJ na URL para consulta automática
+            const urlParams = new URLSearchParams(window.location.search);
+            const cnpjParam = urlParams.get('cnpj');
+            if (cnpjParam) {
+                const cnpjFormatado = formatarCNPJ(cnpjParam);
+                document.getElementById('cnpj').value = cnpjFormatado;
+                // Executa a consulta automaticamente
+                setTimeout(() => {
+                    callcnpj(cnpjFormatado);
+                }, 500);
+            }
         });
     </script>
 </body>
