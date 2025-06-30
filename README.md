@@ -1,11 +1,42 @@
-# Projeto de requisição API do ReceitaWS.com.br 
+# Consulta CNPJ - Projeto com BrasilAPI
 
-Disponível em: https://dev.gortan.com.br/tools/cnpj
+Este é um projeto de consulta online de **CNPJ** utilizando a API gratuita da [BrasilAPI](https://brasilapi.com.br/docs#tag/CNPJ), exibindo os dados em uma interface moderna construída com **Bootstrap 5**
 
-Consulta online de CNPJ atraves da API gratuita do Receita WS disponível em https://developers.receitaws.com.br/#/operations/queryCNPJFree 
+Disponível em: [https://ggortan.github.io/consulta-cnpj/](https://ggortan.github.io/consulta-cnpj/)
 
-Retorno dos dados em uma interface construída em Bootstrap 5 
 
-Requisição: get https://receitaws.com.br/v1/cnpj/{cnpj} 
+> **Nota sobre a versão 3:**  
+> Esta versão marca a **migração da API ReceitaWS** (usada nas versões anteriores) para a **BrasilAPI**, uma API pública e gratuita mantida por voluntários, com mais estabilidade e melhor documentação.
 
-Autor: Gabriel Gortan
+---
+
+## API Utilizada
+
+- **BrasilAPI - CNPJ**  
+  Endpoint: `GET https://brasilapi.com.br/api/cnpj/v1/{cnpj}`  
+  Documentação: [https://brasilapi.com.br/docs#tag/CNPJ](https://brasilapi.com.br/docs#tag/CNPJ)
+
+---
+
+## Tecnologias
+
+- HTML5
+- JavaScript
+- Bootstrap 5 (via CDN da Cloudflare)
+- LocalStorage (para armazenar histórico de consultas)
+
+---
+
+## Funcionalidades
+
+- Consulta de CNPJ com dados detalhados
+- Histórico local das últimas consultas realizadas
+- Exportação de histórico em CSV
+- Interface responsiva e amigável
+- Acesso direto ao resultado formatado (ex: `/index.html?cnpj=12345678000195`)
+
+---
+
+Gabriel Gortan  
+🔗 [https://www.linkedin.com/in/gabrielgortan/](https://www.linkedin.com/in/gabrielgortan/)
+

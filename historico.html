@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
     <title>Histórico de Consultas</title>
 </head>
@@ -15,7 +13,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="btn btn-sm btn-primary me-3" role="button" href="index.html"><i class="bi bi-arrow-left"></i></a>
-            <a class="navbar-brand" href="#">Consulta CNPJ v2</a>
+            <a class="navbar-brand" href="#">Consulta CNPJ v3</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,30 +31,78 @@
     </nav>
 
     <div class="container mb-3 mt-3">
-        <div class="d-flex justify-content-between mb-3">
-            <h2>Histórico de Consultas</h2>
-            <button id="clear-history" class="btn btn-danger">Limpar Histórico</button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2><i class="bi bi-clock-history"></i> Histórico de Consultas</h2>
+            <div>
+                <button id="export-history" class="btn btn-outline-primary me-2">
+                    <i class="bi bi-download"></i> Exportar
+                </button>
+                <button id="clear-history" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Limpar Histórico
+                </button>
+            </div>
         </div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>CNPJ</th>
-                    <th>Razão Social</th>
-                    <th>Data da Consulta</th>
-                </tr>
-            </thead>
-            <tbody id="historico-tabela">
-                <!-- Histórico será inserido aqui -->
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">CNPJ</th>
+                                <th scope="col">Razão Social</th>
+                                <th scope="col">Data da Consulta</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historico-tabela">
+                            <!-- Histórico será inserido aqui -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="empty-state" class="text-center py-5 d-none">
+                    <i class="bi bi-inbox display-1 text-muted"></i>
+                    <h4 class="text-muted mt-3">Nenhuma consulta realizada</h4>
+                    <p class="text-muted">Quando você realizar consultas de CNPJ, elas aparecerão aqui.</p>
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="bi bi-search"></i> Fazer primeira consulta
+                    </a>
+                </div>
+            </div>
+        </div>
 
-    <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">Projeto de API - Gabriel G.</p>
-        <p class="mb-0 text-muted text-center">Versão: 2.2.2</p>
-    </footer>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top">
+            <p class="col-md-4 mb-0 text-muted">Projeto de API - Gabriel G.</p>
+            <p class="mb-0 text-muted text-center">Versão: 3.0.0 - BrasilAPI</p>
+        </footer>
+    </div>
 
-</div>
-    <script src="./js/historico.js"></script>
+    <!-- Modal de confirmação -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">
+                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                        Confirmar ação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja limpar todo o histórico de consultas? Esta ação não pode ser desfeita.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirm-clear">
+                        <i class="bi bi-trash"></i> Sim, limpar histórico
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script srv="./js/historico.js"></script>
 </body>
 </html>
