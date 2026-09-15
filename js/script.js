@@ -1,12 +1,35 @@
+const CNPJ_ALFANUMERICO_REGEX = /^[0-9A-Z]{12}[0-9]{2}$/;
+
+function normalizarCNPJ(cnpj) {
+    if (!cnpj) return '';
+    return cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
+}
+
+function aplicarMascaraCNPJ(cnpj) {
+    const cnpjNormalizado = normalizarCNPJ(cnpj);
+    const parte1 = cnpjNormalizado.slice(0, 2);
+    const parte2 = cnpjNormalizado.slice(2, 5);
+    const parte3 = cnpjNormalizado.slice(5, 8);
+    const parte4 = cnpjNormalizado.slice(8, 12);
+    const parte5 = cnpjNormalizado.slice(12, 14);
+
+    let cnpjFormatado = parte1;
+    if (parte2) cnpjFormatado += `.${parte2}`;
+    if (parte3) cnpjFormatado += `.${parte3}`;
+    if (parte4) cnpjFormatado += `/${parte4}`;
+    if (parte5) cnpjFormatado += `-${parte5}`;
+    return cnpjFormatado;
+}
+
 // Função chamada ao pressionar o botão de consulta
-        function callcnpj(cnpj) {
-            const cnpjLimpo = cnpj.replace(/[^0-9]/g, '');
+function callcnpj(cnpj) {
+    const cnpjNormalizado = normalizarCNPJ(cnpj);
             
-            // Validação básica do CNPJ
-            if (cnpjLimpo.length !== 14) {
-                alert('CNPJ deve ter 14 dígitos');
-                return;
-            }
+    // Validação básica do CNPJ
+    if (!CNPJ_ALFANUMERICO_REGEX.test(cnpjNormalizado)) {
+        alert('CNPJ deve conter 14 caracteres alfanuméricos, com os 2 últimos dígitos numéricos.');
+        return;
+    }
 
             // Mostra loading
             const loadingSpinner = document.getElementById('loading-spinner');
@@ -20,7 +43,7 @@
             // Limpa campos anteriores
             limparCampos();
 
-            fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`)
+            fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjNormalizado}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -213,7 +236,7 @@
 
         function formatarCNPJ(cnpj) {
             if (!cnpj) return '';
-            return cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+            return aplicarMascaraCNPJ(cnpj);
         }
 
         function formatarCEP(cep) {
@@ -332,15 +355,19 @@
             }
         });
 
-        // Aplicar máscara no campo CNPJ
+        // Aplicar máscara alfanumérica no campo CNPJ
         $(document).ready(function() {
-            $('#cnpj').mask('00.000.000/0000-00');
+            const cnpjInput = document.getElementById('cnpj');
+
+            cnpjInput.addEventListener('input', function() {
+                this.value = aplicarMascaraCNPJ(this.value);
+            });
             
             // Verifica se há CNPJ na URL para consulta automática
             const urlParams = new URLSearchParams(window.location.search);
             const cnpjParam = urlParams.get('cnpj');
             if (cnpjParam) {
-                const cnpjFormatado = formatarCNPJ(cnpjParam);
+                const cnpjFormatado = formatarCNPJ(normalizarCNPJ(cnpjParam));
                 document.getElementById('cnpj').value = cnpjFormatado;
                 // Executa a consulta automaticamente
                 setTimeout(() => {

@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Função para formatar CNPJ
             function formatarCNPJ(cnpj) {
                 if (!cnpj) return '';
-                const cnpjLimpo = cnpj.replace(/[^0-9]/g, '');
+                const cnpjLimpo = cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
                 if (cnpjLimpo.length === 14) {
-                    return cnpjLimpo.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5');
+                    return `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice(2, 5)}.${cnpjLimpo.slice(5, 8)}/${cnpjLimpo.slice(8, 12)}-${cnpjLimpo.slice(12, 14)}`;
                 }
                 return cnpj;
             }
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     btnConsultar.innerHTML = '<i class="bi bi-search"></i>';
                     btnConsultar.title = 'Consultar novamente';
                     btnConsultar.onclick = () => {
-                        const cnpjLimpo = entry.cnpj.replace(/[^0-9]/g, '');
+                        const cnpjLimpo = entry.cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
                         window.location.href = `index.html?cnpj=${cnpjLimpo}`;
                     };
                     
