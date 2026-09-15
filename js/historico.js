@@ -4,11 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const exportHistoryBtn = document.getElementById('export-history');
             const emptyState = document.getElementById('empty-state');
             const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            const CNPJ_ALFANUMERICO_REGEX = /^[0-9A-Z]{12}[0-9]{2}$/;
+
+            function normalizarCNPJ(cnpj) {
+                if (!cnpj) return '';
+                return cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
+            }
 
             // Função para formatar CNPJ
             function formatarCNPJ(cnpj) {
                 if (!cnpj) return '';
-                const cnpjLimpo = cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
+                const cnpjLimpo = normalizarCNPJ(cnpj);
                 if (cnpjLimpo.length === 14) {
                     return `${cnpjLimpo.slice(0, 2)}.${cnpjLimpo.slice(2, 5)}.${cnpjLimpo.slice(5, 8)}/${cnpjLimpo.slice(8, 12)}-${cnpjLimpo.slice(12, 14)}`;
                 }
@@ -31,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 historico.forEach((entry, index) => {
                     const tr = document.createElement('tr');
+                    const cnpjNormalizado = normalizarCNPJ(entry.cnpj);
                     
                     const tdCnpj = document.createElement('td');
-                    const cnpjFormatado = formatarCNPJ(entry.cnpj);
+                    const cnpjFormatado = formatarCNPJ(cnpjNormalizado);
                     tdCnpj.innerHTML = `<code class="text-primary">${cnpjFormatado}</code>`;
 
                     const tdRSocial = document.createElement('td');
@@ -53,8 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     btnConsultar.innerHTML = '<i class="bi bi-search"></i>';
                     btnConsultar.title = 'Consultar novamente';
                     btnConsultar.onclick = () => {
-                        const cnpjLimpo = entry.cnpj.toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
-                        window.location.href = `index.html?cnpj=${cnpjLimpo}`;
+                        if (!CNPJ_ALFANUMERICO_REGEX.test(cnpjNormalizado)) {
+                            mostrarToast('CNPJ inválido no histórico', 'warning');
+                            return;
+                        }
+                        window.location.href = `index.html?cnpj=${cnpjNormalizado}`;
                     };
                     
                     const btnRemover = document.createElement('button');
@@ -104,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 let csv = 'CNPJ,Razão Social,Data da Consulta\n';
                 historico.forEach(entry => {
-                    const cnpj = `"${entry.cnpj}"`;
+                    const cnpj = `"${formatarCNPJ(normalizarCNPJ(entry.cnpj))}"`;
                     const rsocial = `"${entry.rsocial || ''}"`;
                     const data = `"${entry.data}"`;
                     csv += `${cnpj},${rsocial},${data}\n`;
