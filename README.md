@@ -29,7 +29,7 @@ Disponível em: [https://ggortan.github.io/consulta-cnpj/](https://ggortan.githu
 
 ## Funcionalidades
 
-- Consulta de CNPJ com dados detalhados
+- Consulta de CNPJ com suporte ao novo padrão alfanumérico (A-Z e 0-9)
 - Histórico local das últimas consultas realizadas
 - Exportação de histórico em CSV
 - Interface responsiva e amigável
@@ -39,4 +39,3 @@ Disponível em: [https://ggortan.github.io/consulta-cnpj/](https://ggortan.githu
 
 Gabriel Gortan  
 🔗 [https://www.linkedin.com/in/gabrielgortan/](https://www.linkedin.com/in/gabrielgortan/)
-
