@@ -6,7 +6,8 @@ Disponível em: [https://ggortan.github.io/consulta-cnpj/](https://ggortan.githu
 
 
 > **Nota sobre a versão 3:**  
-> Esta versão marca a **migração da API ReceitaWS** (usada nas versões anteriores) para a **BrasilAPI**, uma API pública e gratuita mantida por voluntários, com mais estabilidade e melhor documentação.
+> Esta versão marca a **migração da API ReceitaWS** (usada nas versões anteriores) para a **BrasilAPI**, uma API pública e gratuita mantida por voluntários, com mais estabilidade e melhor documentação.  
+> Também foi atualizada para funcionar com o **novo padrão de CNPJ alfanumérico**.
 
 ---
 
